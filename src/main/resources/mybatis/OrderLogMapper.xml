@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ph.simplebookkeeping.mapper.OrderLogMapper">
+
+    <select id="countBalanceByAccountId" resultType="java.lang.Double">
+        SELECT
+            sum( order_num )
+        FROM
+            order_log ol
+        WHERE
+            ol.account_id = #{accountId, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectOrderLogByAccountId" resultType="com.ph.simplebookkeeping.vo.OrderLogVO">
+        SELECT
+            order_name,
+            order_num,
+            current_balance,
+            order_date
+        FROM
+            order_log
+        where
+            date(order_date) BETWEEN date(  #{startDate, jdbcType=VARCHAR} ) and date(  #{endDate, jdbcType=VARCHAR} )
+            and account_id = #{accountId, jdbcType=VARCHAR}
+        ORDER BY
+            order_date
+    </select>
+
+</mapper>

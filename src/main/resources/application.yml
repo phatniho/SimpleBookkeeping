@@ -1,0 +1,17 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /SimpleBookkeeping
+
+mybatis-plus:
+  mapper-locations: mybatis/*.xml
+  type-aliases-package: com.ph.simplebookkeeping.entity
+  configuration:
+    map-underscore-to-camel-case: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+spring:
+  jackson:
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
+  datasource:
+    url: jdbc:sqlite::resource:static/SimpleBookkeeping.db
